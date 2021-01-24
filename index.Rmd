@@ -1,0 +1,18 @@
+---
+site: distill::distill_website
+title: "Quin"
+image: "quin.jpg"
+links:
+  - label: LinkedIn
+    url: 
+  - label: Twitter
+    url: 
+  - label: GitHub
+    url: "https://github.com/"
+  - label: Email
+    url: 
+output:
+  postcards::jolla
+---
+ 
+Hello, I'm Quin.
