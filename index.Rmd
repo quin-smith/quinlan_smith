@@ -4,15 +4,13 @@ title: "Quin"
 image: "quin.jpg"
 links:
   - label: LinkedIn
-    url: 
-  - label: Twitter
-    url: 
+    url: "https://www.linkedin.com/in/quinlan-smith-32b2859b/"
   - label: GitHub
-    url: "https://github.com/"
+    url: "https://github.com/quin-smith"
   - label: Email
-    url: 
+    url: "mailto:quinlan_smith@bren.ucsb.edu"
 output:
   postcards::jolla
 ---
  
-Hello, I'm Quin.
+Hello, I'm Quin!  Welcome to my homepage!  I am a graduate student in the Master of Environmental Science and Management program at the Bren School of Environmental Science and Management at University of Southern California, Santa Barbara.  My interests include data science and visualization, geographic information systems, and coastal ecosystems conservation planning.
