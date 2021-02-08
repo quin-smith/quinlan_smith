@@ -1,0 +1,19 @@
+[
+  {
+    "path": "posts/2021-02-08-welcome/",
+    "title": "welcome",
+    "description": "Hello, world!",
+    "author": [
+      {
+        "name": "Quin Smith",
+        "url": {}
+      }
+    ],
+    "date": "2021-02-08",
+    "categories": [],
+    "contents": "\r\nHi, welcome to my blog.\r\n\r\n\r\n\r\n",
+    "preview": {},
+    "last_modified": "2021-02-08T10:42:42-08:00",
+    "input_file": {}
+  }
+]
