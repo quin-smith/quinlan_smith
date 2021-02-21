@@ -1,0 +1,112 @@
+---
+title: "Spatial Analysis of California Oil Spills during 2008"
+description: |
+  Project completed for an assignment in Allison Horst's ESM 244 class.
+author:
+  - name: Quin Smith
+    url: {}
+date: 02-21-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(here)
+library(janitor)
+library(sf)
+library(tmap)
+library(gstat)
+library(stars)
+library(RColorBrewer)
+```
+
+### Introduction
+
+This analysis explores reported incidents of oil spills across the State of California in 2008.  Data is composed of reports from the California Department of Fish and Wildlife, Office of Spill Prevention and Response (OSPR) Incident Tracking Database (Credits: DFG-OSPR, CalEMA)
+
+```{r, message = FALSE, warning = FALSE, results = 'hide'}
+#read in data
+
+#oil spill data
+oil_spill <- read_sf(here("_posts/2021-02-21-oilspills/oil_spill/"), layer = "Oil_Spill_Incident_Tracking_%5Bds394%5D") %>% 
+  clean_names()
+
+#ca counties shapefiles
+ca_counties <- read_sf(here("_posts/2021-02-21-oilspills/ca_counties"), layer = "CA_Counties_TIGER2016") %>% 
+  clean_names() %>% 
+  select(name)
+
+#check projections
+st_crs(oil_spill)
+st_crs(ca_counties)
+
+#quick plot
+#ggplot() +
+ # geom_sf(data = ca_counties) +
+  #geom_sf(data = oil_spill, aes(color = specificlo))
+```
+
+### Interactive map of California oil spills (2008)
+
+```{r, warning = FALSE, message = FALSE}
+#create interactive tmap
+tmap_mode("view")
+
+tm_shape(oil_spill) +
+  tm_dots("specificlo", popup.vars = c("localecity", "localecoun"), id = "oesnumber", title = "Spill Environment", palette = c("steelblue2", "burlywood", "steelblue4"))
+  
+```
+
+**Figure 1:** Interactive map showing the reported oil spills in California during 2008.  Color symbology based on the location of the spill.  *Data: Office of Spill Prevention and Response Incident Tracking Database.*
+
+```{r, warning = FALSE, message = FALSE}
+#create a chloropleth of inland spills
+
+#subset of ca counties
+ca_counties_tojoin <- ca_counties %>% 
+  rename(localecoun = name)
+
+#subset of inland spill by county
+inland_spills <- oil_spill %>% 
+  filter(inlandmari == "Inland") %>% 
+  count(localecoun) 
+  
+
+#join to create the df of the subset by county
+ca_inland_spills <- ca_counties_tojoin %>% 
+  st_join(inland_spills)
+```
+
+### Static chloropleth map of California oil spills by county (2008)
+
+```{r, warning = FALSE, message = FALSE}
+#map the data
+#using ggplot
+
+ggplot(data = ca_inland_spills) +
+  geom_sf(aes(fill = n), color = "slategrey", size = 0.1) +
+  scale_fill_gradientn(colors = c("lightyellow","orange","tomato4")) +
+  theme_minimal() +
+  labs(fill = "Number of inland oil spills \nby county")
+
+#using tmap
+#tmap_mode("plot")
+
+#tm_shape(ca_inland_spills) +
+  #tm_polygons(col = "n", title = "Number of inland oil spills \nby County")
+```
+
+**Figure 2:** Chloropleth map showing a comparison of reported oil spills between California counties during 2008.  *Data: Office of Spill Prevention and Response Incident Tracking Database.*
+
+### Data Citation:
+
+California Department of Fish and Game, Office of Spill Prevention and Response. “Oil Spill Incident Tracking [ds394]” [digital map]. “California State Geoportal”. 2009-07-23
+. https://gis.data.ca.gov/datasets/7464e3d6f4924b50ad06e5a553d71086_0/data. (2021-02-20).
+
+
+
+

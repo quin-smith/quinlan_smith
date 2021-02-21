@@ -1,6 +1,6 @@
 ---
 site: distill::distill_website
-title: "Quin"
+title: "Quin Smith"
 image: "quin.jpg"
 links:
   - label: LinkedIn
@@ -13,4 +13,4 @@ output:
   postcards::jolla
 ---
  
-Hello, I'm Quin!  Welcome to my homepage!  I am a graduate student in the Master of Environmental Science and Management program at the Bren School of Environmental Science and Management at University of Southern California, Santa Barbara.  My interests include data science and visualization, geographic information systems, and coastal ecosystems conservation planning.
+ I am a graduate student in the Master of Environmental Science and Management program at the Bren School of Environmental Science and Management at University of Southern California, Santa Barbara.  My interests include data science and visualization, geographic information systems, and coastal ecosystems conservation planning.
