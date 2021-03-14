@@ -62,8 +62,8 @@ plot(cet_density)
 
 ```{r, message=FALSE, warning = FALSE, results='hide'}
 #download shapefiles
-coast <- ne_download(scale = 110, type = 'land', category = 'physical', returnclass = "sf")
-states <- ne_download(scale = 110, type = 'states', category = 'cultural', returnclass = "sf")
+coast <- ne_download(scale = "large", type = 'land', category = 'physical', returnclass = "sf")
+states <- ne_download(scale = "large", type = 'states', category = 'cultural', returnclass = "sf")
 ```
 
 ```{r, warning=FALSE, message=FALSE, out.width= '200%', fig.cap = "**Figure 2:** Map of species richness for 35 species of cetaceans off the coast of the California Bight.  Threshhold value for presence was set at 0.6 probability of occurence.  *Data: Kaschner et al. (2016).  Aquamaps.org.*", preview = TRUE}
