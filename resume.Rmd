@@ -1,0 +1,18 @@
+---
+title: "My Latest CV"
+author:
+  - name: Quin Smith
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(knitr)
+```
+
+```{r echo=FALSE, message=FALSE, fig.align='left', fig.pos='H', out.width='1000px', out.height='1100px'}
+knitr::include_graphics("resume_qs.pdf")
+```
+
+
+
