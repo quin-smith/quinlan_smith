@@ -12,4 +12,6 @@ navbar:
       href: about.html
     - text: "Projects"
       href: blog.html
+    - text: "CV"
+      href: resume_qs.pdf
 output: distill::distill_article

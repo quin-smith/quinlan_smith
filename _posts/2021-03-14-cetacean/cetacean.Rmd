@@ -1,0 +1,91 @@
+---
+title: "Raster analysis of cetacean species richness off the California Bight"
+description: |
+  Project completed for an assignment in Allison Horst's ESM 244 class.
+author:
+  - name: Quin Smith
+    url: {}
+date: 03-14-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(raster) 
+library(tidyverse)
+library(janitor)
+library(here)
+library(sf)
+library(fasterize)
+library(rnaturalearth)
+library(grid)
+```
+
+### Introduction
+
+This analysis- with associated Rmarkdown file-- explores cetacean species richness of the area off the coast of the California Bight. The presence or absence of the 35 species of cetaceans was calculated using a raster of values associated with the probability of occurrence for each species.  These values were captured from analysis by Kaschner, et al. and are relative to species-specific environmental suitability based on water temperature, depth, salinity, and distance to land.  The extent of the analysis was constrained to 125°W to 115°W and 32°N to 38°N.  *Data: Kaschner et al. (2016).  Aquamaps.org.*
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+#read in data
+cetaceans <- list.files(path = here('_posts/2021-03-14-cetacean/data/ca_cetaceans'), full.names = TRUE, pattern = ".tif")
+
+#stack the raster files
+ca_cetaceans <- stack(cetaceans)
+
+#transform crs
+proj4string(ca_cetaceans) <- "+proj=utm +zone=10 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"
+```
+
+```{r, results = 'hide', message=FALSE, warning=FALSE}
+#create function to reclassify the raster to a binary (threshhold value = 0.6)
+is_present <- function(x, thresh = 0.6) {
+  y <- ifelse(x >= thresh, 1, 0)
+  return(y)
+}
+
+#run function over raster stack
+cet_presence <- calc(ca_cetaceans, fun = is_present)
+
+#plot presence for each species individually
+#plot(cet_presence, col = c('red', 'green4'))
+
+#sum the rasters to reclassify values by richness
+cet_density <- calc(cet_presence, fun = sum, na.rm = TRUE)
+```
+
+```{r, message= FALSE, warning=FALSE, fig.cap = "**Figure 1:** Species richness raster for 35 species of cetaceans off the coast of the California Bight.  Threshhold value for presence was set at 0.6 probability of occurrence for each species.  *Data: Kaschner et al. (2016).  Aquamaps.org.*"}
+#richness raster
+plot(cet_density)
+```
+
+```{r, message=FALSE, warning = FALSE, results='hide'}
+#download shapefiles
+coast <- ne_download(scale = 110, type = 'land', category = 'physical', returnclass = "sf")
+states <- ne_download(scale = 110, type = 'states', category = 'cultural', returnclass = "sf")
+```
+
+```{r, warning=FALSE, message=FALSE, out.width= '200%', fig.cap = "**Figure 2:** Map of species richness for 35 species of cetaceans off the coast of the California Bight.  Threshhold value for presence was set at 0.6 probability of occurence.  *Data: Kaschner et al. (2016).  Aquamaps.org.*", preview = TRUE}
+
+#filter shapefile for CA
+ca <- states %>% 
+  filter(name == "California")
+
+#turn raster into a df
+cet_density_df <- raster::rasterToPoints(cet_density) %>%
+  as.data.frame()
+
+#create a ggplot map of richness
+ggplot() +
+  geom_raster(data = cet_density_df, aes(x = x, y = y, fill = layer)) +
+  scale_fill_distiller(type = "seq", palette = "Blues", aesthetics = "fill", direction = 1) +
+  geom_sf(data = coast, fill = "darkgrey") +
+  geom_sf(data = ca, fill = "darkgrey") +
+  coord_sf(xlim = c(-125, -115), ylim = c(32,38), expand = FALSE) +
+  labs(x = NULL, y = NULL, fill = "Cetacean Richness")
+```  
+
+### Data Citations
+
+Kaschner, K., Rius-Barile, J., Kesner-Reyes, K., Garilao, C., Kullander, S., Rees, T., & Froese, R. (2016). AquaMaps: Predicted range maps for aquatic species. www.aquamaps.org

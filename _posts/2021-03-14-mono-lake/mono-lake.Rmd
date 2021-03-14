@@ -1,0 +1,69 @@
+---
+title: "A graphical representation of changing water levels in California's Mono Lake, 1850-2017 "
+description: |
+  Project completed for an assignment in Allison Horst's ESM 206 class.
+author:
+  - name: Quin Smith
+    url: {}
+date: 03-14-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(here)
+library(janitor)
+library(ggalt)
+library(ggrepel)
+```
+
+```{r, echo = FALSE, warning= FALSE, fig.width = 9, fig.height = 6, fig.cap = "**Figure 1:** Plot showing annual change in water level (feet above sea level) in Mono Lake from 1850 to 2017.  Threshhold water level values impacting bird populations and two key historical events related to changing water levels are noted.  Data: Mono Basin Clearinghouse"    }
+#read in data
+mono_lake <- read.csv(here("_posts/2021-03-14-mono-lake/", "mono_lake_annual_levels.csv"), skip = 5) %>% 
+  clean_names() %>% 
+  mutate(event = case_when(
+    year == 1941 ~ "1941 - LA DWP begins diverting water",
+    year == 1994 ~ "1994 - Decision 1631 sets \nlake level of 6,392 ft \nto protect Mono Lake"
+  ))
+
+#reticulating splines
+splines <- as.data.frame(spline(mono_lake$year, mono_lake$lake_level_feet_above_sea_level))
+
+#visualize data
+ggplot(data = mono_lake, aes(x = year, y = lake_level_feet_above_sea_level)) +
+  geom_line(data = splines, aes(x = x, y = y), size = 1, color = "royalblue4") +
+  geom_ribbon(data = mono_lake, aes(ymin = -Inf, ymax = lake_level_feet_above_sea_level), fill = "royalblue", alpha = .2) +
+  geom_ribbon(aes(ymin = 6350, ymax = 6360), fill = "darkorange", alpha = .3) +
+  geom_ribbon(aes(ymin = -Inf, ymax = 6350), fill = "darkorange", alpha = .5) +
+  geom_hline(yintercept = 6360, color = "darkorange", size = 1, linetype = "longdash") +
+  annotate("text", x = 1855, y = 6363,
+           label = "6,360 ft - Water salinity above 120 g/L leads to decreased food supply for grebes and gulls",
+           hjust = 0, size = 3, fontface = "bold") +
+  geom_hline(yintercept = 6377, color = "goldenrod2", size = 1) +
+  annotate("text", x = 1855, y = 6380,
+           label = "6,377 ft - Emergence of land bridges leads to bird predation at nesting sites",
+           hjust = 0, size = 3, fontface = "bold") +
+  geom_hline(yintercept = 6350, color = "darkorange", size = 1) +
+  annotate("text", x = 1855, y = 6353,
+           label = "6,350 ft - Water salinity above 150 g/L leads to acute impacts on food supply for grebes and gulls",
+           hjust = 0, size = 3, fontface = "bold") +
+  geom_label_repel(aes(label = event),
+                   fill = "white",
+                   size = 3.5,
+                   nudge_y = 25) +
+  scale_x_continuous(breaks = seq(1850,2017,10), expand = c(0,0)) +
+  ylim(6350,6450) +
+  labs(x = "\nYear",
+       y = "Lake Level (feet above sea level)\n") +
+  theme_minimal() +
+  coord_cartesian(clip = "off")
+```
+
+### Citation
+
+Mono Basin Clearinghouse, Mono Lake Committee. “Mono Lake Levels 1850-present”. https://www.monobasinresearch.org/data/levelyearly.php. (October 2017).

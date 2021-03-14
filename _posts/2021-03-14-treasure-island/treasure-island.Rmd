@@ -1,0 +1,156 @@
+---
+title: "Text analysis of Robert Louis Stevenson's Treasure Island"
+description: |
+  Project completed for an assignment in Allison Horst's ESM 244 class.
+author:
+  - name: Quin Smith
+    url: {}
+date: 03-14-2021
+output:
+  distill::distill_article:
+    self_contained: false
+    code_folding: hide
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(tidytext)
+library(textdata)
+library(pdftools)
+library(ggwordcloud)
+library(gutenbergr)
+library(jpeg)
+library(here)
+library(ggpubr)
+```
+
+### Introduction
+
+The following text analysis-- with associated Rmarkdown file-- explores word frequency trends and conveys the AFINN sentiment score of each chapter of Robert Louis Stevenson's classic pirate adventure novel, *Treasure Island.*   
+
+```{r, warning = FALSE, message = FALSE}
+#read in Treasure Island by Robert Louis Stevenson
+
+ti <- gutenberg_download(120, mirror = "http://mirrors.xmission.com/gutenberg/")
+```
+
+```{r, warning = FALSE, message=FALSE}
+#trim the text/tidy
+ti_tidy <- ti %>% 
+  mutate(text = str_trim(text))
+```
+
+```{r, warning = FALSE, message = FALSE}
+#remove text outside of chapters in the novel (remove the Part structure), turn chapters into numerics 
+ti_df <- ti_tidy %>% 
+  slice(-(1:110)) %>% 
+  mutate(chapter = case_when(
+    str_detect(text, "^[0-9]+$") ~ text,
+    str_detect(text, "PART[^LY]") ~ "PART",
+    TRUE ~ NA_character_)) %>% 
+  fill(chapter) %>% 
+  filter(chapter != "PART") %>% 
+  mutate(chapter = as.numeric(chapter))
+```
+
+```{r, warning = FALSE, message = FALSE}
+#tokenize, remove gb_id
+ti_tokens <- ti_df %>% 
+  unnest_tokens(word, text) %>% 
+  dplyr::select(-gutenberg_id)
+```
+
+```{r, warning = FALSE, message = FALSE}
+#remove stop words
+ti_nonstop_words <- ti_tokens %>% 
+  anti_join(stop_words)
+
+#word count sans stop words
+ti_nonstop_counts <- ti_nonstop_words %>% 
+  count(chapter, word)
+
+#top 5 words per chapter
+ti_top_5_words <- ti_nonstop_counts %>% 
+  group_by(chapter) %>% 
+  arrange(-n) %>% 
+  slice(1:5)
+
+```
+### Top 5 Words by Chapter
+
+This analysis looks at the top 5 words for each chapter of *Treasure Island* to associate any trends... The results were unsurprising, the book is about pirates after all.
+
+```{r, fig.height= 10, fig.width= 10, warning = FALSE, message = FALSE, fig.cap = "**Figure 1:** Counts of the top 5 most frequently used words in Robert Louis Stevenson's *Treasure Island* by chapter."}
+#visualize the word counts
+ggplot(data = ti_top_5_words, aes(x = word, y = n)) +
+  geom_col(fill = "blue") +
+  facet_wrap(~chapter, scales = "free") +
+  coord_flip() +
+  theme_bw()
+```
+
+```{r, warning = FALSE, message = FALSE, results='hide'}
+#join sentiment analysis lexicon to TI df
+ti_afinn <- ti_nonstop_words %>% 
+  inner_join(get_sentiments("afinn"))
+
+#get afinn counts for chapter
+afinn_counts <- ti_afinn %>% 
+  count(chapter, value)
+```
+
+```{r, results='hide', warning=FALSE, message=FALSE}
+# Plot them: 
+#ggplot(data = afinn_counts, aes(x = value, y = n)) +
+ # geom_col() +
+  #facet_wrap(~chapter)
+```
+### Sentiment Analysis using AFINN
+
+I ran the book against the AFINN lexicon to find the mean sentiment scores per chapter.  The book is a little on the dark side, especially for a book written primarily for boys.
+
+```{r, message=FALSE, warning=FALSE, fig.width=6.5, fig.height=6.5, fig.cap= "**Figure 2:** Mean sentiment score for each chapter of Robert Louis Stevenson's *Treasure Island* based on the AFINN sentiment lexicon.  A mean score of -5 is a highly negative sentiment while a mean score of 5 is a highly positive sentiment"}
+# Find the mean afinn score by chapter: 
+afinn_means <- ti_afinn %>% 
+  group_by(chapter) %>% 
+  summarize(mean_afinn = mean(value))
+
+#plot the afinn means
+ggplot(data = afinn_means, 
+       aes(x = fct_rev(as.factor(chapter)), y = mean_afinn)) +
+  geom_col() +
+  labs(y = "Mean AFINN integer", x = "Chapter") +
+  coord_flip() +
+  theme_bw()
+```
+
+### Word Cloud
+
+The final product is a word cloud to present the top 100 words in the novel.
+
+```{r, warning = FALSE, message = FALSE, preview = TRUE}
+#create subset of top 100 words
+ti_top100 <- ti_nonstop_words %>%
+  count(word) %>% 
+  arrange(-n) %>% 
+  slice(1:100)
+
+# Import image for background
+img.file <- here("_posts/2021-03-14-treasure-island/", "treasure_island.jpg")
+img <- readJPEG(img.file)
+
+#plot it
+ti_cloud <- ggplot(data = ti_top100, aes(label = word)) +
+  background_image(img) +
+  geom_text_wordcloud(aes(color = n, size = n), shape = "circle") +
+  scale_size_area(max_size = 10) +
+  scale_color_gradientn(colors = c("goldenrod", "purple", "#660099")) +
+  theme_minimal()
+
+ti_cloud
+```
+
+### Citation
+
+Stevenson, R. L. (2006) *Treasure Island.* Project Gutenberg. [Pdf] Retrieved February 20, 2021, from Project Gutenberg Mirror, http://mirrors.xmission.com/gutenberg/.
