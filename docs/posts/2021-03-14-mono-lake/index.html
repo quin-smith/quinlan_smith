@@ -86,7 +86,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-<title>Urban Agsplorer, Coastal Restorer: A graphical representation of changing water levels in California's Mono Lake, 1850-2017 </title>
+<title>Quin Smith - Portfolio of Work: A graphical representation of changing water levels in California's Mono Lake, 1850-2017 </title>
 
 <meta property="description" itemprop="description" content="Project completed for an assignment in Allison Horst&#39;s ESM 206 class."/>
 
@@ -97,15 +97,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta name="article:author" content="Quin Smith"/>
 
 <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-<meta property="og:title" content="Urban Agsplorer, Coastal Restorer: A graphical representation of changing water levels in California&#39;s Mono Lake, 1850-2017 "/>
+<meta property="og:title" content="Quin Smith - Portfolio of Work: A graphical representation of changing water levels in California&#39;s Mono Lake, 1850-2017 "/>
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="Project completed for an assignment in Allison Horst&#39;s ESM 206 class."/>
 <meta property="og:locale" content="en_US"/>
-<meta property="og:site_name" content="Urban Agsplorer, Coastal Restorer"/>
+<meta property="og:site_name" content="Quin Smith - Portfolio of Work"/>
 
 <!--  https://dev.twitter.com/cards/types/summary -->
 <meta property="twitter:card" content="summary"/>
-<meta property="twitter:title" content="Urban Agsplorer, Coastal Restorer: A graphical representation of changing water levels in California&#39;s Mono Lake, 1850-2017 "/>
+<meta property="twitter:title" content="Quin Smith - Portfolio of Work: A graphical representation of changing water levels in California&#39;s Mono Lake, 1850-2017 "/>
 <meta property="twitter:description" content="Project completed for an assignment in Allison Horst&#39;s ESM 206 class."/>
 
 <!--/radix_placeholder_meta_tags-->
@@ -463,7 +463,7 @@ d-title {
 
 </style>
 
-<script src="../../site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <link href="../../site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
 <link href="../../site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
 <script src="../../site_libs/headroom-0.9.4/headroom.min.js"></script>
@@ -1035,10 +1035,6 @@ figure img.external {
   position: relative;
   margin-bottom: 2.5em;
   margin-top: 1.5em;
-}
-
-.figure img {
-  width: 100%;
 }
 
 .figure .caption {
@@ -1870,7 +1866,16 @@ function init_distill() {
 
     // hoverable references
     $('span.citation[data-cites]').each(function() {
-      var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+      if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+        var fn = $(this).children()[0]
+        $(this).html(fn.shadowRoot.querySelector("sup"))
+        $(this).id = fn.id
+        fn.remove()
+      }
+      var refs = $(this).attr('data-cites').split(" ");
+      var refHtml = refs.map(function(ref) {
+        return "<p>" + $('#ref-' + ref).html() + "</p>";
+      }).join("\n");
       window.tippy(this, {
         allowHTML: true,
         content: refHtml,
@@ -1881,6 +1886,31 @@ function init_distill() {
         placement: 'bottom-start'
       });
     });
+
+    // fix footnotes in tables (#411)
+    // replacing broken distill.pub feature
+    $('table d-footnote').each(function() {
+      // we replace internal showAtNode methode which is triggered when hovering a footnote
+      this.hoverBox.showAtNode = function(node) {
+        // ported from https://github.com/distillpub/template/pull/105/files
+        calcOffset = function(elem) {
+            let x = elem.offsetLeft;
+            let y = elem.offsetTop;
+            // Traverse upwards until an `absolute` element is found or `elem`
+            // becomes null.
+            while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                x += elem.offsetLeft;
+                y += elem.offsetTop;
+            }
+
+            return { left: x, top: y };
+        }
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+        const bbox = node.getBoundingClientRect();
+        const offset = calcOffset(node);
+        this.show([offset.left + bbox.width, offset.top + bbox.height]);
+      }
+    })
 
     // clear polling timer
     clearInterval(tid);
@@ -1980,6 +2010,8 @@ function init_common() {
   // mark non-body figures created by knitr chunks as 100% width
   $('.layout-chunk').each(function(i, val) {
     var figures = $(this).find('img, .html-widget');
+    // ignore leaflet img layers (#106)
+    figures = figures.filter(':not(img[class*="leaflet"])')
     if ($(this).attr('data-layout') !== "l-body") {
       figures.css('width', '100%');
     } else {
@@ -2002,7 +2034,7 @@ function init_common() {
   // get rid of index.html references in header
   if (window.location.protocol !== "file:") {
     $('.distill-site-header a[href]').each(function(i,val) {
-      $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
     });
   }
 
@@ -2380,13 +2412,14 @@ d-appendix d-footnote-list a.footnote-backlink {
 <header class="header header--fixed" role="banner">
 <nav class="distill-site-nav distill-site-header">
 <div class="nav-left">
-<a href="../../index.html" class="title">Urban Agsplorer, Coastal Restorer</a>
+<a href="../../index.html" class="title">Quin Smith - Portfolio of Work</a>
 <input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
 </div>
 <div class="nav-right">
 <a href="../../index.html">Home</a>
 <a href="../../about.html">About</a>
-<a href="../../blog.html">Projects</a>
+<a href="../../gis.html">GIS Portfolio</a>
+<a href="../../blog.html">School Data Projects</a>
 <a href="../../resume.html">CV</a>
 <a href="https://kerry-nixon.shinyapps.io/agxplorr/">agxplorR</a>
 <a href="javascript:void(0);" class="nav-toggle">&#9776;</a>

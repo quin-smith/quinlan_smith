@@ -1,0 +1,36 @@
+---
+title: " Visualizing Flood Inundation Due to Sea Level Rise in the San Elijo Lagoon Using GIS (2019)"
+description: |
+  A 'bathtub model' analysis of San Elijo lagoon using LiDAR point cloud data.
+author:
+  - name: Quin Smith
+    url: {}
+preview: 1-4_foot_2.jpg
+date: 2022-07-18
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+library(here)
+```
+
+For my GIS associate degree capstone project at Palomar Community College, I performed a 'bathtub model' analysis of San Elijo lagoon to visualize the impact of projected sea level rise. First, I used esri ArcGIS Pro to generate a high resolution (1.5 feet) digital surface model from USGS LiDAR point-cloud data (Figure 1). The digital surface model required some data cleaning and gap filling, which was accomplished through manual and automatic interpolation.
+
+![Figure 1: LiDAR Point Cloud data of San Elijo lagoon (USGS 3DEP program, 2019)](lidardataset.png)
+
+Next, I used Map Algebra expressions to generate new rasters from the digital surface model showing areas of the lagoon where the elevation was below a one, two, three, and four foot rise in local mean sea level (MSL), recorded from a NOAA tidal guage off the coast of nearby La Jolla, CA. 
+
+I produced several maps and a final report for this project. Figure 2 shows an amalgamation of these maps, visualizing potential inundation impacts of one, two, three, and four feet increases in mean sea level.
+
+![Figure 2: Amalgamation of 1-4 feet increases in mean sea level and potential inundation impacts to San Elijo Lagoon](1-4_foot_2.jpg)
+
+I also had the opportunity to present the project as a poster at the 26th National Advanced Technological Education (ATE) Principal Investigators’ Conference in Washington, D.C. as a representative for Palomar College (Figure 3).
+
+![Figure 3: Poster from the 26th National Advanced Technological Education Principal Investigators' Conference (2019)](poster.jpg)
+
+The project used Mean Sea Level (MSL) for baseline sea level as opposed to the Mean High High Water (MHHW) and did not account for potential storm surges. It also did not account for future changes to the lagoon from construction and mitigation or from natural processes such as accretion.

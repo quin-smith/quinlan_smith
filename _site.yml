@@ -1,5 +1,5 @@
 name: "."
-title: "Urban Agsplorer, Coastal Restorer"
+title: "Quin Smith - Portfolio of Work"
 theme: theme.css
 description: |
   Quin's site
@@ -10,7 +10,9 @@ navbar:
       href: index.html
     - text: "About"
       href: about.html
-    - text: "Projects"
+    - text: "GIS Portfolio"
+      href: gis.html
+    - text: "School Data Projects"
       href: blog.html
     - text: "CV"
       href: resume.html

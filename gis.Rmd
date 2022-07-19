@@ -1,0 +1,7 @@
+---
+title: "GIS Projects"
+listing:
+  posts:
+    - 2022-07-18-sanelijo
+    - 2022-07-18-songs
+---
