@@ -1,7 +1,7 @@
 ---
-title: "goletaslough"
+title: "Belding's Savannah Sparrow Conservation in Goleta Slough (Bren, 2021)"
 description: |
-  A short description of the post.
+  This conservation planning capstone project quantified the impacts of sea level rise on Belding's Savannah Sparrow habitat in Goleta Slough using Sea Level Affecting Marshes Model (SLAMM).
 author:
   - name: Quin Smith
     url: {}
@@ -16,8 +16,45 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+At UCSB's Bren School of Environmental Science & Management, my masters specialization was conservation planning, which provided highly technical training in "strategies and tactics for achieving conservation goals and objectives for specific resources and areas of interest" (Bren website). The specialization coursework focused on ecological inventory and monitoring, data analysis, mapping, and modeling, in addition to policy, land and water use planning, and economics.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+An additional requirement of the specialization was a capstone "practicum" project approved by faculty. For this project, my partner and I developed an assessment of potential sea level rise impacts on the Belding's Savannah Sparrow in Goleta Slough in Goleta, CA.
 
+Belding's Savannah Sparrow (Figure 1) is a State of California-listed endangered subspecies of the Savannah Sparrow that is highly dependent on saltmarsh habitat, particularly dense patches of Salicornia (pickleweed). The south coast of Santa Barbara County is the northern extent of the sparrow's range. Because Goleta slough is managed for multiple objectives--it contains a municipal airport, gas company facilities, and Goleta Sanitary District facilities--the ecological/biodiversity importance of the slough is somewhat at odds with the wider urban context.
+
+![Figure 1: Belding's Savannah Sparrow (Wikipedia).](belding.jpg)
+
+Our project sought to explore the risk of sea level rise to Salicornia and Belding's Savannah Sparrow habitat in the slough, which has already been severely reduced due to urban development. To accomplish this, we used the Sea Level Affecting Marshes Model (SLAMM), a GIS program developed by Warren Pinnacle Consulting with funding from The Nature Conservancy and the US EPA. 
+
+## Inputs for SLAMM
+
+SLAMM uses raster inputs including slope, a digital elevation model, and a National Wetlands Inventory (NWI) classification, and physical parameters such as accretion rate, salt line, mean tide line, and sea level rise scenario to simulate dynamic effects of sea level rise on marshes over a user-defined time period.
+
+To build the inputs, we first used ArcGIS Pro to georeference a PDF of planning documents for the Santa Barbara airport, which included a vegetation survey of the slough (Figure 2).
+
+![Figure 2: Georeferenced vegetation survey from airport planning documents.](veg_layer.PNG)
+
+Next, we used ArcGIS Pro's unsupervised machine learning image classification to segment the georeferenced image and then merged the resulting polygons together to form a vegetation layer that included delineation of existing Salicornia patches. We overlaid a National Wetlands Inventory over this to develop our NWI layer (Figure 3).
+
+![Figure 3: NWI classification layer.](veg_rast_layer.PNG)
+
+Finally, we created a digital elevation model and slope layer using USGS 3DEP data (Figure 4). These were also used as inputs for SLAMM.
+
+![Figure 4: Slope layer.](slope_layer.PNG)
+
+## Running SLAMM
+
+With all the GIS inputs set up, we used tidal data from NOAA gauges and slough characteristics from literature to parameterize the physical properties of the simulation. We made some assumptions, including our accretion rate values. Because of the uncertainty around accretion rate, which is subject to variance from several factors including upstream erosion, we decided to run the simulation twice: once using an accretion rate of 1 mm per year and again for an accretion rate of 5 mm per year. According to literature we found, this reflects either end of a likely range predicted by experts. 
+
+We ran each simulation until the year 2100 under a sea level rise scenario of 1 meter rise by the year 2100. The results for the 1 mm accretion rate are shown in Figure 5. Results for the 5 mm accretion rate are shown in Figure 6.
+
+![Figure 5: Results using simulated 1 mm accretion rate and 1 meter of sea level rise by the year 2100.](RESULTS_1mm.png)
+
+![Figure 6: Results using simulated 5 mm accretion rate and 1 meter of sea level rise by the year 2100.](RESULTS_5mm.png)
+
+By overlaying these layers over our original vegetation layer and using map algebra, we were able to determine the amount of Salicornia habitat area lost or gained under both accretion scenarios. Figure 7 shows a map of the Salicornia habitat area lost or gained considering a 1 mm accretion rate. Figure 8 shows the same considering a 5 mm accretion rate.
+
+![Figure 7: Salicornia habitat lost and gained under the 1 mm accretion rate simulation.](veg_loss_or_gain_1mm.png)
+
+![Figure 8: Salicornia habitat lost and gained under the 5 mm accretion rate simulation.](veg_loss_or_gain_5mm.png)
 
