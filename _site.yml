@@ -12,7 +12,7 @@ navbar:
       href: about.html
     - text: "GIS Portfolio"
       href: gis.html
-    - text: "School Data Projects"
+    - text: "R Data Analysis"
       href: blog.html
     - text: "CV"
       href: resume.html
