@@ -1,10 +1,11 @@
 ---
-title: "drone"
+title: "Remote Aerial Imagery using Drones (Palomar College, 2019)"
 description: |
-  A short description of the post.
+  For this project, I stitched together drone images I collected to create a photogrammetric digital surface model and orthomap of the old facilities department at Palomar College.
 author:
   - name: Quin Smith
     url: {}
+preview: 04-11-19_oldfacil_dem.png
 date: 2022-07-18
 output:
   distill::distill_article:
@@ -16,8 +17,12 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Distill is a publication format for scientific and technical writing, native to the web.
+While at Palomar College, I took coursework in small unmanned aerial systems (sUAS). These courses taught me to become a remote pilot and how to use software (Metashape) to create orthoimage maps and aerial photogrammetry with drones.
 
-Learn more about using Distill at <https://rstudio.github.io/distill>.
+For one project, my partner and I flew a mission over the old facilities department buildings on the Palomar College campus. I then used Metashape to create an orthoimage (Figure 1) and 3D mesh, which were then converted into a digital surface model of the buildings and surrounding area (Figure 2).
+
+![Figure 1: Orthoimage of the old facilities department on the Palomar College campus.](19-04-11_oldfacil_ortho.png)
+
+![Figure 2: Digital Elevation (Surface) Model of the old facilities department on the Palomar College campus.](04-11-19_oldfacil_dem.png)
 
 
