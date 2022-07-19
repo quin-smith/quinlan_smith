@@ -1,5 +1,5 @@
 ---
-title: " Visualizing Flood Inundation Due to Sea Level Rise in the San Elijo Lagoon Using GIS (2019)"
+title: " Visualizing Flood Inundation Due to Sea Level Rise in the San Elijo Lagoon Using GIS (Palomar College, 2019)"
 description: |
   A 'bathtub model' analysis of San Elijo lagoon using LiDAR point cloud data.
 author:

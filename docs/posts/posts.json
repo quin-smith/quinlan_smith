@@ -18,7 +18,7 @@
   },
   {
     "path": "posts/2022-07-18-sanelijo/",
-    "title": " Visualizing Flood Inundation Due to Sea Level Rise in the San Elijo Lagoon Using GIS (2019)",
+    "title": " Visualizing Flood Inundation Due to Sea Level Rise in the San Elijo Lagoon Using GIS (Palomar College, 2019)",
     "description": "A 'bathtub model' analysis of San Elijo lagoon using LiDAR point cloud data.",
     "author": [
       {
@@ -30,12 +30,12 @@
     "categories": [],
     "contents": "\r\nFor my GIS associate degree capstone project at Palomar Community\r\nCollege, I performed a ‘bathtub model’ analysis of San Elijo lagoon to\r\nvisualize the impact of projected sea level rise. First, I used esri\r\nArcGIS Pro to generate a high resolution (1.5 feet) digital surface\r\nmodel from USGS LiDAR point-cloud data (Figure 1). The digital surface\r\nmodel required some data cleaning and gap filling, which was\r\naccomplished through manual and automatic interpolation.\r\nFigure 1: LiDAR Point Cloud data of San\r\nElijo lagoon (USGS 3DEP program, 2019)Next, I used Map Algebra expressions to generate new rasters from the\r\ndigital surface model showing areas of the lagoon where the elevation\r\nwas below a one, two, three, and four foot rise in local mean sea level\r\n(MSL), recorded from a NOAA tidal guage off the coast of nearby La\r\nJolla, CA.\r\nI produced several maps and a final report for this project. Figure 2\r\nshows an amalgamation of these maps, visualizing potential inundation\r\nimpacts of one, two, three, and four feet increases in mean sea\r\nlevel.\r\nFigure 2: Amalgamation of 1-4 feet\r\nincreases in mean sea level and potential inundation impacts to San\r\nElijo LagoonI also had the opportunity to present the project as a poster at the\r\n26th National Advanced Technological Education (ATE) Principal\r\nInvestigators’ Conference in Washington, D.C. as a representative for\r\nPalomar College (Figure 3).\r\nFigure 3: Poster from the 26th National\r\nAdvanced Technological Education Principal Investigators’ Conference\r\n(2019)The project used Mean Sea Level (MSL) for baseline sea level as\r\nopposed to the Mean High High Water (MHHW) and did not account for\r\npotential storm surges. It also did not account for future changes to\r\nthe lagoon from construction and mitigation or from natural processes\r\nsuch as accretion.\r\n\r\n\r\n\r\n",
     "preview": "posts/2022-07-18-sanelijo/1-4_foot_2.jpg",
-    "last_modified": "2022-07-18T21:17:17-07:00",
-    "input_file": {}
+    "last_modified": "2022-07-19T09:39:37-07:00",
+    "input_file": "sanelijo.knit.md"
   },
   {
     "path": "posts/2022-07-18-songs/",
-    "title": "Work from San Onofre Nuclear Generating Station Mitigation Monitoring Program",
+    "title": "Work from San Onofre Nuclear Generating Station Mitigation Monitoring Program (2019-2020)",
     "description": "A selection of GIS projects completed during my contract at SONGS MMP.",
     "author": [
       {
@@ -47,8 +47,8 @@
     "categories": [],
     "contents": "\r\nBetween September, 2019 and April, 2020, I worked as a wetlands field\r\nand lab assistant at the San Onofre Nuclear Generating Station\r\nMitigation Monitoring Program (SONGS MMP). The SONGS program is\r\nadministered through UC Santa Barbara’s Marine Science Institute and\r\nconducts independent, long-term monitoring and evaluation of San\r\nDieguito Lagoon and three reference sites. The program is a condition of\r\nthe coastal development permit issued to Southern California Edison by\r\nthe California Coastal Commission for the operation of SONGS Units 2 and\r\n3. Part of my work there was GIS-oriented and I received additional\r\ncredits towards my associate degree in GIS at Palomar College through\r\nthese GIS project.\r\nAll images used with permission from SONGS MMP.\r\nMachine Learning\r\nClassification\r\nOne of the GIS projects I completed for SONGS MMP was piloting a\r\nvalidation methodology for the project’s vegetative coverage standard.\r\nIn order for Southern California Edison to receive mitigation credit for\r\nwetlands restoration, a certain percentage of the San Dieguito Lagoon\r\nproject area must be covered by wetland vegetation. This is assessed by\r\na large, third-party company that uses aerial imaging and multi-spectral\r\nsensors. However, the principal investigators wanted to find a way to\r\nvalidate the results in-house.\r\nI spent several weeks training esri ArcGIS Pro’s supervised machine\r\nlearning image classification software on multi-spectral drone imagery\r\nin San Dieguito Lagoon to classify vegetation in the lagoon. Figure 1\r\nshows the drone imagery, while figure 2 shows the classification\r\nresults.\r\nFigure 1: Multi-spectral drone imagery of\r\nstudy areas. Areas in red show near-infrared reflectance where\r\nvegetation is present.Figure 2: Rasters of vegetated and\r\nun-vegetated areas classified by supervised machine learning. Green\r\nshows areas where vegetation is present, brown shows areas where\r\nvegetation is not present.I developed the methodology workflow and file organization schema for\r\nthe validation process. However, because the imagery was not of great\r\nquality due to conditions on the day of the drone flight, we were not\r\ncompletely confident with the results.\r\nGrid Classification\r\nAnother GIS project I completed at SONGS MMP was converting the raw\r\nvegetative coverage results from the aforementioned remote sensing\r\ncompany into a gridded format used by the principle investigators to\r\ndetermine whether project standards were met. The results are shown in\r\nfigure 3.\r\nFigure 3: Binned results of vegetation\r\ncoverage in 10 x 10 meter gridded format. To be assessed as salt marsh\r\nhabitat, cover of vegetation must be at least 30% in a grid\r\ncell.Project Mapping\r\nAnother part of the GIS work at SONGS MMP was mapping project\r\nassets–such as air and water quality loggers–using RTK GPS. I also\r\ncreated maps used in project presentations for the scientific advisory\r\npanel and the public. Figure 4 shows one example.\r\nFigure 4: Slide from a SONGS MMP\r\nscientific advisory presentation (02-20-2020) showing map of gridded\r\nvegetation coverage results.\r\n\r\n\r\n",
     "preview": "posts/2022-07-18-songs/SAP.jpg",
-    "last_modified": "2022-07-18T21:18:16-07:00",
-    "input_file": {}
+    "last_modified": "2022-07-19T09:38:57-07:00",
+    "input_file": "songs.knit.md"
   },
   {
     "path": "posts/2022-07-18-test/",
