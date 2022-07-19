@@ -5,6 +5,7 @@ description: |
 author:
   - name: Quin Smith
     url: {}
+preview: RESULTS_1mm.png
 date: 2022-07-19
 output:
   distill::distill_article:
