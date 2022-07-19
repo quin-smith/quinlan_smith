@@ -13,4 +13,4 @@ output:
   postcards::jolla
 ---
  
-I am a recent graduate of the Master of Environmental Science and Management program at the Bren School of Environmental Science and Management -- University of Southern California, Santa Barbara.  My interests include geographic information systems, data science and visualization, and wetland conservation.
+I am a recent graduate of the Master of Environmental Science and Management program at the Bren School of Environmental Science and Management -- University California, Santa Barbara.  My interests include geographic information systems, data science and visualization, and wetland conservation.
