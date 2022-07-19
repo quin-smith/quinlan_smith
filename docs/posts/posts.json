@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-07-19-geado/",
+    "title": "Guidance for Ecological Impact Assessment of Desalination Operations, City of Santa Barbara Water Resources (2021)",
+    "description": "Some GIS work for my internship with the City of Santa Barbara, providing guidance for developing an ecological impact assessment for the Charles E. Meyer desalination facility.",
+    "author": [
+      {
+        "name": "Quin Smith",
+        "url": {}
+      }
+    ],
+    "date": "2022-07-19",
+    "categories": [],
+    "contents": "\r\nOver the summer of 2021, I worked on a three member research team to\r\nconduct a comprehensive study of methodologies to assess the ecological\r\nimpact of the Charles E. Meyer desalination facility on the local marine\r\nenvironment. The facility has a unique position within the current\r\nregulatory environment. These special circumstances made it necessary to\r\nresearch several alternate methods of assessment.\r\nThe team wrote a 70 page report detailing various methods and\r\nprovided information regarding the physical and biological\r\ncharacteristics offshore from the desal plant. As the primary GIS\r\nspecialist on the team, I produced many of the maps that were provided.\r\nSeveral examples are provided below in Figures 1-7.\r\nFigure 1: GIS map of Charles E. Meyer\r\nDesalination Facility, the facility’s intake line, and the facility’s\r\noutfall line, in relation to Highway 101.Figure 2: GIS map of Charles E. Meyer\r\nDesalination Facility, the facility’s intake line and the facility’s\r\noutfall line with diffuser zone. This figure shows the extent of the\r\nintake and outfall lines in the Santa Barbara Channel.Figure 3: Sea floor substrate\r\ncharacteristics of the Santa Barbara Channel in and around the Charles\r\nMeyer Desalination Facility’s intake and outfall lines.Figure 4: Sea floor substrate\r\ncharacteristics of the Santa Barbara Channel and the Charles Meyer\r\nDesalination Facility’s intake and outfall lines in relation to Camby’s\r\nReef (represented by a turquoise pentagon) and One-Mile Reef\r\n(represented by an orange pentagon).Figure 5: Map of the Santa Barbara\r\nChannel’s offshore habitats in relation to the Charles Meyer\r\nDesalination Facility’s intake and outfall lines.Figure 6: Map of 2013 Southern California\r\nBight Regional Monitoring Program fish trawl sampling stations,\r\nestablished by the Southern California Coastal Water Research Project\r\n(SCCWRP). The stations are shown in relation to the Charles Meyer\r\nDesalination Facility intake and outfall lines.Figure 7: Map of the Marine Protected\r\nArea network across the Santa Barbara Channel shown in relation to the\r\nCharles Meyer Desalination Facility.\r\n\r\n\r\n",
+    "preview": "posts/2022-07-19-geado/Figure2-3.jpg",
+    "last_modified": "2022-07-19T13:48:27-07:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-07-19-goletaslough/",
     "title": "Belding's Savannah Sparrow Conservation in Goleta Slough (Bren, 2021)",
     "description": "This conservation planning capstone project quantified the impacts of sea level rise on Belding's Savannah Sparrow habitat in Goleta Slough using Sea Level Affecting Marshes Model (SLAMM).",
