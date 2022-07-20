@@ -23,7 +23,7 @@ Between September, 2019 and April, 2020, I worked as a wetlands field and lab as
 
 ## Machine Learning Classification
 
-One of the GIS projects I completed for SONGS MMP was piloting a validation methodology for the project's vegetative coverage standard. In order for Southern California Edison to receive mitigation credit for wetlands restoration, a certain percentage of the San Dieguito Lagoon project area must be covered by wetland vegetation. This is assessed by a large, third-party company that uses aerial imaging and multi-spectral sensors. However, the principal investigators wanted to find a way to validate the results in-house.
+One of the GIS projects I completed for SONGS MMP was piloting a validation methodology for the project's vegetative coverage standard. In order for Southern California Edison to receive mitigation credit for wetlands restoration, a certain percentage of the San Dieguito Lagoon project area must be covered by wetland vegetation. This is assessed by a third-party company that uses aerial imaging and multi-spectral sensors. However, the principal investigators wanted to find a way to validate the results in-house.
 
 I spent several weeks training esri ArcGIS Pro's supervised machine learning image classification software on multi-spectral drone imagery in San Dieguito Lagoon to classify vegetation in the lagoon. Figure 1 shows the drone imagery, while figure 2 shows the classification results.
 
@@ -31,16 +31,16 @@ I spent several weeks training esri ArcGIS Pro's supervised machine learning ima
 
 ![Figure 2: Rasters of vegetated and un-vegetated areas classified by supervised machine learning. Green shows areas where vegetation is present, brown shows areas where vegetation is not present.](reclass_05_191024_1.jpg)
 
-I developed the methodology workflow and file organization schema for the validation process. However, because the imagery was not of great quality due to conditions on the day of the drone flight, we were not completely confident with the results.
+I developed the methodology workflow and file organization schema for the validation process. However, because the imagery was of reduced quality due to conditions on the day of the drone flight, we were not completely confident of the results.
 
 ## Grid Classification
 
-Another GIS project I completed at SONGS MMP was converting the raw vegetative coverage results from the aforementioned remote sensing company into a gridded format used by the principle investigators to determine whether project standards were met. The results are shown in figure 3.
+Another GIS project I completed at SONGS MMP was converting raw vegetative coverage results from the aforementioned remote sensing company into a gridded format used by the principle investigators to determine whether project standards were met. The results are shown in figure 3.
 
 ![Figure 3: Binned results of vegetation coverage in 10 x 10 meter gridded format. To be assessed as salt marsh habitat, cover of vegetation must be at least 30% in a grid cell.](gridclass_layout1024_2.jpg)
 
 ## Project Mapping
 
-Another part of the GIS work at SONGS MMP was mapping project assets--such as air and water quality loggers--using RTK GPS. I also created maps used in project presentations for the scientific advisory panel and the public. Figure 4 shows one example.
+Another task at SONGS MMP was mapping project assets, such as air and water quality loggers, using RTK GPS. In addition, I created maps used in project presentations for the scientific advisory panel and the public. Figure 4 shows one example.
 
 ![Figure 4: Slide from a SONGS MMP scientific advisory presentation (02-20-2020) showing map of gridded vegetation coverage results.](SAP.jpg)

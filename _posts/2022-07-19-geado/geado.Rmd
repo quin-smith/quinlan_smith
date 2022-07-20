@@ -1,7 +1,7 @@
 ---
 title: "Guidance for Ecological Impact Assessment of Desalination Operations, City of Santa Barbara Water Resources (2021)"
 description: |
-  Some GIS work for my internship with the City of Santa Barbara, providing guidance for developing an ecological impact assessment for the Charles E. Meyer desalination facility.
+  Selection of GIS work for my internship with the City of Santa Barbara providing guidance for an ecological impact assessment for the Charles E. Meyer desalination facility.
 author:
   - name: Quin Smith
     url: {}
@@ -17,9 +17,9 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-Over the summer of 2021, I worked on a three member research team to conduct a comprehensive study of methodologies to assess the ecological impact of the Charles E. Meyer desalination facility on the local marine environment. The facility has a unique position within the current regulatory environment. These special circumstances made it necessary to research several alternate methods of assessment.
+Over the summer of 2021, I worked on a three member research team to conduct a comprehensive study of methodologies to assess the ecological impact of the Charles E. Meyer desalination facility on the local marine environment. The facility has a unique position within the current regulatory environment; these special circumstances made it necessary to research several alternate methods of assessment.
 
-The team wrote a 70 page report detailing various methods and provided information regarding the physical and biological characteristics offshore from the desal plant. As the primary GIS specialist on the team, I produced many of the maps that were provided. Several examples are provided below in Figures 1-7.
+The team presented a 70 page report which provided information regarding the physical and biological characteristics of the marine environment offshore of the desal plan and detailed various methods of impact assessment. As the primary GIS specialist on the team, I produced a majority of the maps provided in the report, a sample of which are shown in figures 1-7.
 
 ![Figure 1: GIS map of Charles E. Meyer Desalination Facility, the facility’s intake line, and the facility’s outfall line, in relation to Highway 101.](facility_zoomed.jpg)
 
